@@ -351,6 +351,11 @@
     if (screenKey === 'settings') renderSettings();
   }
 
+  function handleHashChange() {
+    const screenKey = window.location.hash.replace('#', '') || 'dashboard';
+    showScreen(screenKey);
+  }
+
   function bindMoodSelection() {
     document.querySelectorAll('.mood-chip').forEach(chip => {
       chip.addEventListener('click', () => {
@@ -516,6 +521,7 @@
 
     const initialHash = window.location.hash.replace('#', '') || 'dashboard';
     showScreen(initialHash);
+    window.addEventListener('hashchange', handleHashChange);
 
     document.querySelector('#closeEntryView')?.addEventListener('click', () => closeModal('#entryViewModal'));
     document.querySelector('#entryViewModal')?.addEventListener('click', event => {

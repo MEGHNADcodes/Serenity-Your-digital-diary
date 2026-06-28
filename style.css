@@ -939,6 +939,19 @@ body {
   padding: var(--spacing-lg);
   border-radius: var(--radius-xl);
   border: 1px solid var(--border-color);
+  min-height: 260px;
+  transition: all var(--transition-base);
+}
+
+.luna-card.expanded {
+  min-height: 420px;
+}
+
+.luna-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
 }
 
 .luna-card h3 {
@@ -946,7 +959,22 @@ body {
   font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--text-primary);
+  margin: 0;
+}
+
+.luna-chat {
+  min-height: 120px;
+  max-height: 180px;
+  overflow-y: auto;
   margin-bottom: var(--spacing-md);
+}
+
+.luna-card.expanded .luna-chat {
+  max-height: 260px;
+}
+
+.luna-card.expanded .luna-input-field {
+  min-width: 0;
 }
 
 .luna-chat {
@@ -974,6 +1002,7 @@ body {
 .luna-input {
   display: flex;
   gap: var(--spacing-xs);
+  align-items: center;
 }
 
 .luna-input-field {
