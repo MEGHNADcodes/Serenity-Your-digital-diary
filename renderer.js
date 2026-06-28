@@ -33,56 +33,72 @@
     }
   }
 
-  function saveEntries(entries) {
-    localStorage.setItem(storageKey, JSON.stringify(entries));
-  }
+  function bindLunaChat() {
+    // Sidebar preview (non-interactive) + modal chat behavior
+    const openButton = document.querySelector('#openLunaChatBtn');
+    const modalOverlay = document.querySelector('#lunaChatModal');
+    const closeButton = document.querySelector('#closeLunaChatBtn');
+    const modalInput = document.querySelector('#lunaChatInput');
+    const modalSend = document.querySelector('#lunaChatSendBtn');
+    const modalMessages = document.querySelector('#lunaChatMessages');
 
-  function loadSettings() {
-    try {
-      const raw = localStorage.getItem(settingsKey);
-      const parsed = raw ? JSON.parse(raw) : {};
-      return {
-        nickname: parsed.nickname || 'Krupa',
-        theme: parsed.theme || 'sakura',
-        reminderTime: parsed.reminderTime || '',
-        personalQuote: parsed.personalQuote || 'You are enough.',
-        ...parsed
-      };
-    } catch (error) {
-      return {
-        nickname: 'Krupa',
-        theme: 'sakura',
-        reminderTime: '',
-        personalQuote: 'You are enough.'
-      };
+    const responses = [
+      'Thank you for sharing that with me. Your feelings matter, and you are allowed to take this one moment slowly.',
+      'That sounds heavy. Remember that even a small breath can make space for calm.',
+      'I am here with you. Let this page hold what feels too big to carry alone.',
+      'Your words are safe here. Breathe and let them out.'
+    ];
+
+    function addChatMessage(container, text, isUser) {
+      const message = document.createElement('div');
+      message.className = `chat-message ${isUser ? 'user' : 'ai'}`;
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble';
+      bubble.innerHTML = `<p>${text}</p>`;
+      message.appendChild(bubble);
+      container?.appendChild(message);
+      container?.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
     }
-  }
 
-  function saveSettings(settings) {
-    localStorage.setItem(settingsKey, JSON.stringify(settings));
-  }
+    function sendFromModal(text) {
+      if (!text) return;
+      addChatMessage(modalMessages, text, true);
+      modalInput.value = '';
+      setTimeout(() => {
+        const response = responses[Math.floor(Math.random() * responses.length)];
+        addChatMessage(modalMessages, response, false);
+      }, 800);
+    }
 
-  function getEntries() {
-    return loadEntries();
-  }
+    // Open modal
+    openButton?.addEventListener('click', () => {
+      if (modalOverlay) modalOverlay.style.display = 'flex';
+      setTimeout(() => modalOverlay?.classList.add('visible'), 20);
+      // focus input when opened
+      setTimeout(() => modalInput?.focus(), 120);
+    });
 
-  function formatDate(dateString) {
-    return new Date(dateString).toLocaleDateString(undefined, {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
+    // Close modal
+    closeButton?.addEventListener('click', () => {
+      modalOverlay?.classList.remove('visible');
+      setTimeout(() => modalOverlay && (modalOverlay.style.display = 'none'), 200);
+    });
+
+    modalOverlay?.addEventListener('click', event => {
+      if (event.target === modalOverlay) {
+        modalOverlay.classList.remove('visible');
+        setTimeout(() => modalOverlay && (modalOverlay.style.display = 'none'), 200);
+      }
+    });
+
+    modalSend?.addEventListener('click', () => sendFromModal(modalInput?.value.trim()));
+    modalInput?.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendFromModal(modalInput?.value.trim());
+      }
     });
   }
-
-  function createEntry(text) {
-    const entries = getEntries();
-    const mood = document.querySelector('.mood-chip.selected')?.textContent.trim() || 'Calm';
-    const entry = {
-      id: `entry-${Date.now()}`,
-      title: text.split('\n')[0].slice(0, 40) || 'Untitled entry',
-      date: new Date().toISOString(),
-      mood,
-      text,
       preview: text.slice(0, 120)
     };
     entries.unshift(entry);
@@ -349,6 +365,46 @@
     if (screenKey === 'search') renderSearchResults(document.querySelector('#searchQuery')?.value.trim() || '');
     if (screenKey === 'achievements') renderAchievements();
     if (screenKey === 'settings') renderSettings();
+    updateHeaderForScreen(screenKey);
+  }
+
+  // update header and focus behavior when changing screens
+  function updateHeaderForScreen(screenKey) {
+    const title = document.querySelector('#primaryPageTitle');
+    const subtitle = document.querySelector('#primaryPageSubtitle');
+    if (!title) return;
+    switch (screenKey) {
+      case 'dashboard':
+        title.textContent = 'Your Thoughts';
+        if (subtitle) subtitle.textContent = 'Capture the moment and reflect with calm intention.';
+        // focus diary and place cursor at top
+        const textarea = document.querySelector('.diary-textarea');
+        if (textarea) {
+          textarea.focus();
+          try { textarea.setSelectionRange(0, 0); } catch (e) {}
+          textarea.scrollTop = 0;
+        }
+        break;
+      case 'timeline':
+        title.textContent = 'Timeline';
+        if (subtitle) subtitle.textContent = 'Browse all your past entries.';
+        break;
+      case 'search':
+        title.textContent = 'Search';
+        if (subtitle) subtitle.textContent = 'Find memories by words, mood, or date.';
+        break;
+      case 'achievements':
+        title.textContent = 'Achievements';
+        if (subtitle) subtitle.textContent = 'Celebrate milestones from your journaling.';
+        break;
+      case 'settings':
+        title.textContent = 'Settings';
+        if (subtitle) subtitle.textContent = 'Manage your account and preferences.';
+        break;
+      default:
+        title.textContent = 'Serenity';
+        if (subtitle) subtitle.textContent = '';
+    }
   }
 
   function handleHashChange() {
@@ -449,9 +505,67 @@
       }
     });
 
-    const expandButton = document.querySelector('.luna-expand-btn');
-    expandButton?.addEventListener('click', () => {
-      document.querySelector('.luna-card')?.classList.toggle('expanded');
+    const modalOverlay = document.querySelector('#lunaChatModal');
+    const openButton = document.querySelector('#openLunaChatBtn');
+    const closeButton = document.querySelector('#closeLunaChatBtn');
+    const modalInput = document.querySelector('#lunaChatInput');
+    const modalSend = document.querySelector('#lunaChatSendBtn');
+    const modalMessages = document.querySelector('#lunaChatMessages');
+
+    function addChatMessage(text, isUser, container) {
+      const message = document.createElement('div');
+      message.className = `chat-message ${isUser ? 'user' : 'ai'}`;
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble';
+      bubble.innerHTML = `<p>${text}</p>`;
+      message.appendChild(bubble);
+      container?.appendChild(message);
+      container?.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+    }
+
+    function sendChatMessage(value) {
+      if (!value) return;
+      addChatMessage(value, true, modalMessages);
+      modalInput.value = '';
+      if (typing) typing.style.display = 'flex';
+      setTimeout(() => {
+        if (typing) typing.style.display = 'none';
+        const response = responses[Math.floor(Math.random() * responses.length)];
+        addChatMessage(response, false, modalMessages);
+      }, 900);
+    }
+
+    sendButton?.addEventListener('click', () => sendChatMessage(input?.value.trim()));
+    input?.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendChatMessage(input?.value.trim());
+      }
+    });
+
+    modalSend?.addEventListener('click', () => sendChatMessage(modalInput?.value.trim()));
+    modalInput?.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendChatMessage(modalInput?.value.trim());
+      }
+    });
+
+    openButton?.addEventListener('click', () => {
+      modalOverlay?.style.setProperty('display', 'flex');
+      setTimeout(() => modalOverlay?.classList.add('visible'), 20);
+    });
+
+    closeButton?.addEventListener('click', () => {
+      modalOverlay?.classList.remove('visible');
+      setTimeout(() => modalOverlay?.style.setProperty('display', 'none'), 200);
+    });
+
+    modalOverlay?.addEventListener('click', event => {
+      if (event.target === modalOverlay) {
+        modalOverlay.classList.remove('visible');
+        setTimeout(() => modalOverlay?.style.setProperty('display', 'none'), 200);
+      }
     });
   }
 
@@ -483,9 +597,29 @@
         reminderTime: document.querySelector('#settingReminderTime')?.value || '',
         personalQuote: document.querySelector('#settingPersonalQuote')?.value.trim() || 'You are enough.'
       };
+      const password = document.querySelector('#settingPassword')?.value || '';
+      const confirmPassword = document.querySelector('#settingConfirmPassword')?.value || '';
+      const message = document.querySelector('#settingsMessage');
+
+      if (password && password !== confirmPassword) {
+        if (message) {
+          message.textContent = 'Passwords do not match.';
+          message.style.color = 'crimson';
+        }
+        return;
+      }
+
+      if (password) {
+        settings.passwordHint = `saved-${password.length}`;
+      }
+
       saveSettings(settings);
       updateGreeting(settings);
       applyTheme(settings.theme);
+      if (message) {
+        message.textContent = 'Settings saved successfully.';
+        message.style.color = 'var(--text-secondary)';
+      }
       const btn = document.querySelector('#saveSettingsBtn');
       if (btn) btn.textContent = 'Saved';
       setTimeout(() => { if (btn) btn.textContent = 'Save settings'; }, 1200);

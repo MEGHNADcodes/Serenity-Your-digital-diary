@@ -479,15 +479,15 @@ body {
 .diary-paper {
   position: relative;
   background: linear-gradient(var(--bg-secondary) 1px, transparent 1px);
-  background-size: 100% 30px;
+  background-size: 100% 32px;
   border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  min-height: 300px;
+  padding: calc(var(--spacing-lg) + 8px);
+  min-height: 350px;
 }
 
 .diary-lines {
   position: absolute;
-  left: 44px;
+  left: 50px;
   top: 0;
   bottom: 0;
   width: 1px;
@@ -496,16 +496,16 @@ body {
 
 .diary-textarea {
   width: 100%;
-  min-height: 260px;
+  min-height: 320px;
   border: none;
   background: transparent;
   font-family: var(--font-sans);
   font-size: var(--font-size-base);
-  line-height: 30px;
+  line-height: 32px;
   color: var(--text-primary);
   resize: none;
   outline: none;
-  padding-left: var(--spacing-xl);
+  padding: 12px var(--spacing-lg) var(--spacing-lg) 56px;
 }
 
 .diary-textarea::placeholder {
@@ -554,10 +554,41 @@ body {
 .screen {
   display: none;
   width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
 }
 
 .screen.active {
   display: block;
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+}
+
+.global-page-header {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.global-page-header h1 {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-3xl);
+  margin-bottom: 6px;
+}
+
+.global-page-header p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
 .page-header {
