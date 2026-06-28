@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Companion (Luna) — Serenity</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="global-page-header">
+    <div class="global-header-inner">
+      <div class="global-header-left">
+        <h1 class="page-title">Companion</h1>
+        <p class="page-subtitle">Chat with Luna in a focused view.</p>
+      </div>
+      <div class="global-header-right">
+        <a href="index.html" class="icon-btn">Back</a>
+      </div>
+    </div>
+  </header>
+  <main style="padding:20px;">
+    <div id="lunaChatPanel" class="chat-panel">
+      <div class="chat-messages" id="lunaChatMessages"></div>
+      <div class="chat-input-area">
+        <input id="lunaChatInput" class="chat-input" type="text" placeholder="Share your thoughts..." />
+        <button id="lunaChatSendBtn" class="btn-send">Send</button>
+      </div>
+    </div>
+  </main>
+  <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Settings — Serenity</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="global-page-header">
+    <div class="global-header-inner">
+      <div class="global-header-left">
+        <h1 class="page-title">Settings</h1>
+        <p class="page-subtitle">Personalize your Serenity space.</p>
+      </div>
+      <div class="global-header-right">
+        <a href="index.html" class="icon-btn">Back</a>
+      </div>
+    </div>
+  </header>
+  <main style="padding:20px;">
+    <form class="settings-form" id="settingsForm">
+      <div class="field-row">
+        <label for="settingNickname">Nickname</label>
+        <input id="settingNickname" type="text" placeholder="Enter your name" />
+      </div>
+      <div class="field-row">
+        <label for="settingTheme">Theme</label>
+        <select id="settingTheme">
+          <option value="sakura">Sakura</option>
+          <option value="moonlight">Moonlight</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <label for="settingUsername">Username</label>
+        <input id="settingUsername" type="text" placeholder="Enter your username" />
+      </div>
+      <div class="field-row">
+        <label for="settingPassword">Password</label>
+        <input id="settingPassword" type="password" placeholder="Enter your password" />
+      </div>
+      <div class="field-row">
+        <label for="settingConfirmPassword">Confirm password</label>
+        <input id="settingConfirmPassword" type="password" placeholder="Confirm your password" />
+      </div>
+      <div class="settings-message" id="settingsMessage"></div>
+      <button type="button" id="saveSettingsBtn" class="btn btn-primary">Save settings</button>
+    </form>
+  </main>
+  <script src="renderer.js"></script>
+</body>
+</html>
