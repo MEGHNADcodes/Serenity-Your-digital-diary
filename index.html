@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serenity — Your Digital Diary</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="app-root">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar">
+      <div class="sidebar-content">
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <div class="profile-avatar">
+            <img src="assets/avatar.svg" alt="Profile" />
+          </div>
+          <h2 class="profile-name">Krupa</h2>
+          <p class="profile-greeting">Good Evening 🌙</p>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navigation">
+          <ul>
+            <li class="nav-item active">
+              <a href="#dashboard">
+                <i data-lucide="home"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#timeline">
+                <i data-lucide="clock"></i>
+                <span>Timeline</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#search">
+                <i data-lucide="search"></i>
+                <span>Search</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#achievements">
+                <i data-lucide="trophy"></i>
+                <span>Achievements</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#settings">
+                <i data-lucide="settings"></i>
+                <span>Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Writing Streak -->
+        <div class="streak-widget">
+          <h3>Writing Streak</h3>
+          <div class="streak-count">7 days</div>
+          <div class="streak-progress">
+            <div class="streak-bar" style="width: 70%;"></div>
+          </div>
+        </div>
+
+        <!-- Inspirational Quote -->
+        <div class="quote-card sidebar-quote">
+          <p class="quote-text">"Like a butterfly emerging from its chrysalis, you are beautiful just as you are."
+          </p>
+        </div>
+
+        <!-- Music Player -->
+        <div class="music-player">
+          <div class="music-track">
+            <span class="track-title">"Calm Waters"</span>
+            <span class="track-artist">Luna Sounds</span>
+          </div>
+          <div class="music-controls">
+            <button class="music-btn">
+              <i data-lucide="skip-back"></i>
+            </button>
+            <button class="music-btn play-pause">
+              <i data-lucide="play"></i>
+            </button>
+            <button class="music-btn">
+              <i data-lucide="skip-forward"></i>
+            </button>
+          </div>
+          <div class="music-progress">
+            <div class="progress-bar" style="width: 45%;"></div>
+          </div>
+        </div>
+
+        <!-- Privacy Indicator -->
+        <div class="privacy-indicator">
+          <i data-lucide="shield"></i>
+          <span>All data encrypted & local</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Center Content -->
+    <main class="main-content">
+      <div class="center-container">
+        <!-- Title and Mood Chips -->
+        <div class="title-section">
+          <h1 class="page-title">Your Thoughts</h1>
+          <div class="mood-chips">
+            <button class="mood-chip">😊 Happy</button>
+            <button class="mood-chip">😌 Calm</button>
+            <button class="mood-chip selected">🥺 Sad</button>
+            <button class="mood-chip">😰 Anxious</button>
+            <button class="mood-chip">😴 Tired</button>
+          </div>
+        </div>
+
+        <!-- Diary Page -->
+        <div class="diary-page">
+          <div class="diary-toolbar">
+            <div class="diary-date">Today, June 28, 2026</div>
+            <button class="diary-btn">
+              <i data-lucide="sparkles"></i>
+            </button>
+          </div>
+          
+          <div class="diary-paper">
+            <div class="diary-lines"></div>
+            <textarea class="diary-textarea" placeholder="Dear Diary...\n\nToday my heart feels..."></textarea>
+          </div>
+          
+          <div class="autosave-indicator">
+            <i data-lucide="check-circle"></i>
+            <span>Saved</span>
+          </div>
+        </div>
+
+        <!-- Previous Entries Carousel -->
+        <div class="previous-entries">
+          <h3 class="section-title">Recent Memories</h3>
+          <div class="entries-carousel">
+            <div class="entry-card">
+              <div class="entry-date">June 27</div>
+              <div class="entry-preview">Today I finally smiled after weeks of...</div>
+              <div class="entry-mood">😊 Happy</div>
+            </div>
+            <div class="entry-card">
+              <div class="entry-date">June 25</div>
+              <div class="entry-preview">I miss grandma's cooking... she always...</div>
+              <div class="entry-mood">🥺 Sad</div>
+            </div>
+            <div class="entry-card">
+              <div class="entry-date">June 22</div>
+              <div class="entry-preview">I realized that my worth isn't tied to...</div>
+              <div class="entry-mood">😌 Calm</div>
+            </div>
+            <div class="entry-card">
+              <div class="entry-date">June 20</div>
+              <div class="entry-preview">I wrote a poem for the first time in...</div>
+              <div class="entry-mood">🤩 Excited</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="sidebar right-sidebar">
+      <div class="sidebar-content">
+        <!-- Memory Jar -->
+        <div class="memory-jar-card">
+          <h3>Memory Jar</h3>
+          <div class="memory-jar-container">
+            <div class="jar-svg-container">
+              <svg class="jar-svg" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 60 80 L 50 100 L 50 250 Q 50 270 70 270 L 130 270 Q 150 270 150 250 L 150 100 L 140 80 Z" 
+                      fill="none" stroke="url(#jarGradient)" stroke-width="2" opacity="0.6"/>
+                <rect x="70" y="60" width="60" height="15" rx="2" fill="url(#lidGradient)" opacity="0.5"/>
+                <rect id="jarLiquid" x="52" y="200" width="96" height="50" rx="8" fill="url(#liquidGradient)" opacity="0.4"/>
+                <defs>
+                  <linearGradient id="jarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#A78BFA;stop-opacity:0.6" />
+                    <stop offset="100%" style="stop-color:#F9A8D4;stop-opacity:0.6" />
+                  </linearGradient>
+                  <linearGradient id="lidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#C4B5FD;stop-opacity:0.7" />
+                    <stop offset="100%" style="stop-color:#A78BFA;stop-opacity:0.5" />
+                  </linearGradient>
+                  <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#F9A8D4;stop-opacity:0.8" />
+                    <stop offset="100%" style="stop-color:#A78BFA;stop-opacity:0.8" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="jar-details">
+              <div class="jar-count">17 memories</div>
+              <div class="jar-progress">85% full</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Luna AI -->
+        <div class="luna-card">
+          <h3>Luna 🌙</h3>
+          <div class="luna-chat">
+            <div class="chat-message ai">
+              <div class="message-bubble">
+                <p>Hi there... I'm Luna. 💫 What's on your mind today?</p>
+              </div>
+            </div>
+          </div>
+          <div class="luna-input">
+            <input type="text" class="luna-input-field" placeholder="Share your thoughts..." />
+            <button class="luna-send-btn">
+              <i data-lucide="send"></i>
+            </button>
+          </div>
+          <div class="typing-indicator" style="display:none;">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <!-- Today's Quote -->
+        <div class="quote-card">
+          <div class="quote-text">"The forest whispers: you are enough, no matter the storms you weather."
+          </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats-card">
+          <h3>Statistics</h3>
+          <div class="stat-item">
+            <span class="stat-label">Total Memories</span>
+            <span class="stat-value">17</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Today's Entries</span>
+            <span class="stat-value">1</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Total Words</span>
+            <span class="stat-value">248</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Current Streak</span>
+            <span class="stat-value">7 days</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Theme Gallery Modal -->
+    <div id="themeGalleryModal" class="modal-overlay" style="display:none;">
+      <div class="modal-card theme-gallery">
+        <div class="modal-header">
+          <h2 class="modal-title">Choose Your Theme</h2>
+          <button class="modal-close" id="closeThemeGallery">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <div class="theme-grid">
+          <div class="theme-card" data-theme="sakura">
+            <div class="theme-preview sakura-preview"></div>
+            <h3 class="theme-name">Sakura</h3>
+            <p class="theme-desc">Soft pink blossoms</p>
+          </div>
+          <div class="theme-card" data-theme="moonlight">
+            <div class="theme-preview moonlight-preview"></div>
+            <h3 class="theme-name">Moonlight</h3>
+            <p class="theme-desc">Calm night sky</p>
+          </div>
+          <div class="theme-card" data-theme="ocean">
+            <div class="theme-preview ocean-preview"></div>
+            <h3 class="theme-name">Ocean</h3>
+            <p class="theme-desc">Deep blue serenity</p>
+          </div>
+          <div class="theme-card" data-theme="forest">
+            <div class="theme-preview forest-preview"></div>
+            <h3 class="theme-name">Forest</h3>
+            <p class="theme-desc">Natural green calm</p>
+          </div>
+          <div class="theme-card" data-theme="autumn">
+            <div class="theme-preview autumn-preview"></div>
+            <h3 class="theme-name">Autumn</h3>
+            <p class="theme-desc">Warm golden hour</p>
+          </div>
+          <div class="theme-card" data-theme="lavender">
+            <div class="theme-preview lavender-preview"></div>
+            <h3 class="theme-name">Lavender</h3>
+            <p class="theme-desc">Purple tranquility</p>
+          </div>
+          <div class="theme-card" data-theme="midnight">
+            <div class="theme-preview midnight-preview"></div>
+            <h3 class="theme-name">Midnight</h3>
+            <p class="theme-desc">Deep dark elegance</p>
+          </div>
+          <div class="theme-card" data-theme="sunrise">
+            <div class="theme-preview sunrise-preview"></div>
+            <h3 class="theme-name">Sunrise</h3>
+            <p class="theme-desc">Morning warmth</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily Check-in Modal -->
+    <div id="checkinOverlay" class="modal-overlay" style="display:none;">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2>Welcome Back 💫</h2>
+          <p>How are you feeling today?</p>
+        </div>
+        <button id="checkinOkBtn" class="btn btn-primary btn-lg">Begin Writing</button>
+      </div>
+    </div>
+
+    <!-- Entry View Modal -->
+    <div id="entryViewModal" class="modal-overlay" style="display:none;">
+      <div class="modal-card entry-view-card">
+        <div class="modal-header">
+          <h2 class="modal-title" id="viewEntryTitle"></h2>
+          <button class="modal-close" id="closeEntryView">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <div class="entry-view-meta" id="viewEntryMeta"></div>
+        <div class="entry-view-content" id="viewEntryContent"></div>
+        <div class="entry-view-actions">
+          <button id="editEntryBtn" class="btn btn-primary">Edit</button>
+          <button id="deleteEntryBtn" class="btn btn-secondary">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

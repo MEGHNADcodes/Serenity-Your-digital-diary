@@ -1,0 +1,12 @@
+{
+  "name": "serenity-your-digital-diary",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Serenity is a calming digital diary experience for the web.",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "start": "python -m http.server 3000"
+  },
+  "author": "Meghnad",
+  "license": "MIT"
+}
