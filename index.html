@@ -106,64 +106,133 @@
     <!-- Center Content -->
     <main class="main-content">
       <div class="center-container">
-        <!-- Title and Mood Chips -->
-        <div class="title-section">
-          <h1 class="page-title">Your Thoughts</h1>
-          <div class="mood-chips">
-            <button class="mood-chip">😊 Happy</button>
-            <button class="mood-chip">😌 Calm</button>
-            <button class="mood-chip selected">🥺 Sad</button>
-            <button class="mood-chip">😰 Anxious</button>
-            <button class="mood-chip">😴 Tired</button>
+        <section id="dashboardScreen" class="screen active">
+          <div class="title-section">
+            <h1 class="page-title">Your Thoughts</h1>
+            <div class="mood-chips">
+              <button class="mood-chip">😊 Happy</button>
+              <button class="mood-chip">😌 Calm</button>
+              <button class="mood-chip selected">🥺 Sad</button>
+              <button class="mood-chip">😰 Anxious</button>
+              <button class="mood-chip">😴 Tired</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Diary Page -->
-        <div class="diary-page">
-          <div class="diary-toolbar">
-            <div class="diary-date">Today, June 28, 2026</div>
-            <button class="diary-btn">
-              <i data-lucide="sparkles"></i>
-            </button>
+          <div class="diary-page">
+            <div class="diary-toolbar">
+              <div>
+                <div class="diary-label">Today, June 28, 2026</div>
+                <div class="diary-meta">Write from the heart, one moment at a time.</div>
+              </div>
+              <button class="diary-btn" id="saveDiaryBtn">
+                <i data-lucide="save"></i>
+              </button>
+            </div>
+            
+            <div class="diary-paper">
+              <div class="diary-lines"></div>
+              <textarea class="diary-textarea" placeholder="Dear Diary...\n\nToday my heart feels..."></textarea>
+            </div>
+            
+            <div class="autosave-indicator">
+              <i data-lucide="check-circle"></i>
+              <span>Saved</span>
+            </div>
           </div>
-          
-          <div class="diary-paper">
-            <div class="diary-lines"></div>
-            <textarea class="diary-textarea" placeholder="Dear Diary...\n\nToday my heart feels..."></textarea>
-          </div>
-          
-          <div class="autosave-indicator">
-            <i data-lucide="check-circle"></i>
-            <span>Saved</span>
-          </div>
-        </div>
 
-        <!-- Previous Entries Carousel -->
-        <div class="previous-entries">
-          <h3 class="section-title">Recent Memories</h3>
-          <div class="entries-carousel">
-            <div class="entry-card">
-              <div class="entry-date">June 27</div>
-              <div class="entry-preview">Today I finally smiled after weeks of...</div>
-              <div class="entry-mood">😊 Happy</div>
+          <div class="previous-entries">
+            <div class="section-header">
+              <h3 class="section-title">Recent Memories</h3>
+              <button class="btn btn-link" id="viewAllTimelineBtn">View full timeline</button>
             </div>
-            <div class="entry-card">
-              <div class="entry-date">June 25</div>
-              <div class="entry-preview">I miss grandma's cooking... she always...</div>
-              <div class="entry-mood">🥺 Sad</div>
+            <div class="entries-carousel"></div>
+          </div>
+        </section>
+
+        <section id="timelineScreen" class="screen">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Timeline</h1>
+              <p class="page-subtitle">Browse every diary entry with sorting and filters.</p>
             </div>
-            <div class="entry-card">
-              <div class="entry-date">June 22</div>
-              <div class="entry-preview">I realized that my worth isn't tied to...</div>
-              <div class="entry-mood">😌 Calm</div>
-            </div>
-            <div class="entry-card">
-              <div class="entry-date">June 20</div>
-              <div class="entry-preview">I wrote a poem for the first time in...</div>
-              <div class="entry-mood">🤩 Excited</div>
+            <div class="timeline-actions">
+              <label class="timeline-label">Sort by</label>
+              <select id="timelineSort" class="timeline-select">
+                <option value="date-desc">Newest first</option>
+                <option value="date-asc">Oldest first</option>
+                <option value="mood">Mood</option>
+                <option value="title">Title</option>
+              </select>
+              <label class="timeline-label">Mood</label>
+              <select id="timelineMoodFilter" class="timeline-select">
+                <option value="all">All moods</option>
+                <option value="Happy">Happy</option>
+                <option value="Calm">Calm</option>
+                <option value="Sad">Sad</option>
+                <option value="Anxious">Anxious</option>
+                <option value="Tired">Tired</option>
+              </select>
             </div>
           </div>
-        </div>
+          <div class="timeline-list"></div>
+        </section>
+
+        <section id="searchScreen" class="screen">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Search</h1>
+              <p class="page-subtitle">Search memories by words, mood, or date.</p>
+            </div>
+          </div>
+          <div class="search-panel">
+            <input id="searchQuery" class="search-input" type="text" placeholder="Search your diary..." />
+            <button id="runSearch" class="btn btn-primary">Search</button>
+          </div>
+          <div class="search-results"></div>
+        </section>
+
+        <section id="achievementsScreen" class="screen">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Achievements</h1>
+              <p class="page-subtitle">Celebrate your journaling journey.</p>
+            </div>
+          </div>
+          <div class="achievements-grid"></div>
+        </section>
+
+        <section id="settingsScreen" class="screen">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Settings</h1>
+              <p class="page-subtitle">Personalize your Serenity space.</p>
+            </div>
+          </div>
+          <form class="settings-form" id="settingsForm">
+            <div class="field-row">
+              <label for="settingNickname">Nickname</label>
+              <input id="settingNickname" type="text" placeholder="Enter your name" />
+            </div>
+            <div class="field-row">
+              <label for="settingTheme">Theme</label>
+              <select id="settingTheme">
+                <option value="sakura">Sakura</option>
+                <option value="moonlight">Moonlight</option>
+                <option value="ocean">Ocean</option>
+                <option value="forest">Forest</option>
+              </select>
+            </div>
+            <div class="field-row">
+              <label for="settingReminderTime">Daily reminder</label>
+              <input id="settingReminderTime" type="time" />
+            </div>
+            <div class="field-row field-row-full">
+              <label for="settingPersonalQuote">Personal quote</label>
+              <textarea id="settingPersonalQuote" rows="3" placeholder="Your daily affirmation..."></textarea>
+            </div>
+            <button type="button" id="saveSettingsBtn" class="btn btn-primary">Save settings</button>
+          </form>
+        </section>
       </div>
     </main>
 
@@ -205,7 +274,12 @@
 
         <!-- Luna AI -->
         <div class="luna-card">
-          <h3>Luna 🌙</h3>
+          <div class="luna-card-header">
+            <h3>Luna 🌙</h3>
+            <button class="luna-expand-btn" type="button" aria-label="Expand Luna chat">
+              <i data-lucide="maximize-2"></i>
+            </button>
+          </div>
           <div class="luna-chat">
             <div class="chat-message ai">
               <div class="message-bubble">
